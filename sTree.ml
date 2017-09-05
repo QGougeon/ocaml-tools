@@ -1,12 +1,15 @@
 open Extra
 
+let string_of_stree = STO.dump_tree
+let stree_of_string = STI.load_tree
+
 let dumpfile = STO.dumpfile
 let loadfile = STI.loadfile
 
-let print = STO.print_treelist
-let pprint_v1 = STO.pprint_v1
-let pprint_v2 = STO.pprint_v2
-let pprint = pprint_v2
+let print : Tree.stree list -> unit = STO.print_treelist
+let pprint_v1 : Tree.stree list -> unit = STO.pprint_v1
+let pprint_v2 : Tree.stree list -> unit = STO.pprint_v2
+let pprint : Tree.stree list -> unit = pprint_v2
 
 let of_string = STD.string
 let to_string = STL.string

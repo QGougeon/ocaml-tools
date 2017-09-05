@@ -58,7 +58,7 @@ type enum =
   | T111
 
 (* print colored tree *)
-let pretty_output_tree_v2 output_string =
+let pretty_output_treelist_v2 output_string =
   (* draw UTF-8 tree line *)
   let conv = function
     | T000 -> "  "
@@ -85,5 +85,4 @@ let pretty_output_tree_v2 output_string =
     | []           -> ()
   in List.iter (tree [] [])
 
-let pprint_v2 treelist =
-	List.iter (fun tree -> pretty_output_tree_v2 print_string tree; print_newline()) treelist;
+let pprint_v2 treelist = pretty_output_treelist_v2 print_string treelist; print_newline()

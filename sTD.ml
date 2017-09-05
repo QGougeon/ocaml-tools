@@ -11,6 +11,6 @@ let option dump = function
 	| Some some -> Tree.Node [dump some]
 let list dump list = Tree.Node (List.map dump list)
 let array dump array = list dump (Array.to_list array)
-let unit = Tree.Node []
+let unit () = Tree.Node []
 let pair dumpA dumpB (a, b) = Tree.Node [dumpA a; dumpB b]
 let trio dumpA dumpB dumpC (a, b, c) = Tree.Node [dumpA a; dumpB b; dumpC c]
