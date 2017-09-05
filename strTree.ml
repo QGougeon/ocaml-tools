@@ -111,6 +111,9 @@ let to_bool = to_string >> StrUtil.bool_of_string
 let of_int = string_of_int >> of_string
 let to_int = to_string >> int_of_string
 
+let of_float = string_of_float >> of_string
+let to_float = to_string >> float_of_string
+
 let of_unit () = Tree.Node []
 let to_unit = function
 	| Tree.Node [] -> ()
@@ -137,6 +140,15 @@ let to_list to_a = function
 let of_array of_a array = of_list of_a (Array.to_list array)
 let to_array to_a stree = Array.of_list (to_list to_a stree)
 
+let of_pair of_a of_b (a, b) = Tree.Node [of_a a; of_b b]
+let to_pair to_a to_b = function
+	| Tree.Node [a; b] -> (to_a a, to_b b)
+	| _ -> assert false
+
+let of_trio of_a of_b of_c (a, b, c) = Tree.Node [of_a a; of_b b; of_c c]
+let to_trio to_a to_b to_c = function
+	| Tree.Node [a; b; c] -> (to_a a, to_b b, to_c c)	
+	| _ -> assert false
 
 
 (* get colored version of str *)

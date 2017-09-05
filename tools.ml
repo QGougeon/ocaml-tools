@@ -1,5 +1,9 @@
 type ('a, 'b) ab = A of 'a | B of 'b
 
+let opfun f = function
+	| Some x -> Some(f x)
+	| None   -> None
+
 let isSome  = function Some _ -> true  | None -> false
 let isNone  = function Some _ -> false | None -> true
 let isOk    = function Ok _ -> true  | Error _ -> false
@@ -69,9 +73,11 @@ let opmin x = opfold_left min x
 
 let opopmin x = opopfold min x
 
+let mm x (mini, maxi) = (min mini x, max maxi x)
+
 let opmm x = function
-	| Some (mini, maxi)	-> Some (min mini x, max maxi x)
-	| None				-> Some (x, x)
+	| Some mmi -> Some(mm x mmi)
+	| None		 -> Some(x, x)
 
 
 
