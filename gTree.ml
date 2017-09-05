@@ -15,13 +15,13 @@ let get_edge_leaf edge : (_, _, _) edge = get_edge get_next_leaf edge
 let get_node_leaf node : (_, _, _) node = get_node get_edge_leaf get_edge_leaf node
 
 let o3_next =
-	let dump = Poly.(function
-	| Node node -> C2_0 node
-	| Leaf leaf -> C2_1 leaf)
-	and load = Poly.(function
-	| C2_0 node -> Node node
-	| C2_1 leaf -> Leaf leaf)
-	in (dump, load)
+  let dump = Poly.(function
+  | Node node -> C2_0 node
+  | Leaf leaf -> C2_1 leaf)
+  and load = Poly.(function
+  | C2_0 node -> Node node
+  | C2_1 leaf -> Leaf leaf)
+  in (dump, load)
 
 let bindump
   (dump_leaf : 'leaf BinUtils.dump)

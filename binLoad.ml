@@ -1,49 +1,49 @@
 let unit : unit BinUtils.load = fun stream -> (), stream
 
 let c2 load0 load1 = function
-	| false::stream -> Poly.(
-		let elem, stream = load0 stream in
-		(C2_0 elem), stream
-	)
-	| true ::stream -> Poly.(
-		let elem, stream = load1 stream in
-		(C2_1 elem), stream
-	)
-	| _ -> failwith "[ocaml-tools/binLoad:c2] parsing error"
+  | false::stream -> Poly.(
+    let elem, stream = load0 stream in
+    (C2_0 elem), stream
+  )
+  | true ::stream -> Poly.(
+    let elem, stream = load1 stream in
+    (C2_1 elem), stream
+  )
+  | _ -> failwith "[ocaml-tools/binLoad:c2] parsing error"
 
 let c3 load0 load1 load2 = function
-	| false::stream -> Poly.(
-		let elem, stream = load0 stream in
-		(C3_0 elem), stream
-	)
-	| true ::false::stream -> Poly.(
-		let elem, stream = load1 stream in
-		(C3_1 elem), stream
-	)
-	| true ::true ::stream -> Poly.(
-		let elem, stream = load1 stream in
-		(C3_2 elem), stream
-	)
-	| _ -> failwith "[ocaml-tools/binLoad:c3] parsing error"
+  | false::stream -> Poly.(
+    let elem, stream = load0 stream in
+    (C3_0 elem), stream
+  )
+  | true ::false::stream -> Poly.(
+    let elem, stream = load1 stream in
+    (C3_1 elem), stream
+  )
+  | true ::true ::stream -> Poly.(
+    let elem, stream = load1 stream in
+    (C3_2 elem), stream
+  )
+  | _ -> failwith "[ocaml-tools/binLoad:c3] parsing error"
 
 let c4 load0 load1 load2 load3 = function
-	| false::false::stream -> Poly.(
-		let elem, stream = load0 stream in
-		(C4_0 elem), stream
-	)
-	| false::true ::stream -> Poly.(
-		let elem, stream = load1 stream in
-		(C4_1 elem), stream
-	)
-	| true ::false::stream -> Poly.(
-		let elem, stream = load2 stream in
-		(C4_2 elem), stream
-	)
-	| true ::true ::stream -> Poly.(
-		let elem, stream = load3 stream in
-		(C4_3 elem), stream
-	)
-	| _ -> failwith "[ocaml-tools/binLoad:c4] parsing error"
+  | false::false::stream -> Poly.(
+    let elem, stream = load0 stream in
+    (C4_0 elem), stream
+  )
+  | false::true ::stream -> Poly.(
+    let elem, stream = load1 stream in
+    (C4_1 elem), stream
+  )
+  | true ::false::stream -> Poly.(
+    let elem, stream = load2 stream in
+    (C4_2 elem), stream
+  )
+  | true ::true ::stream -> Poly.(
+    let elem, stream = load3 stream in
+    (C4_3 elem), stream
+  )
+  | _ -> failwith "[ocaml-tools/binLoad:c4] parsing error"
 
 let choice loadF loadT = function
   | b::stream -> (if b then loadT else loadF) stream
@@ -105,12 +105,12 @@ let list (load : 'a BinUtils.load) : 'a list BinUtils.load=
     | true::stream  ->
       let elem, stream = load stream in
       aux (elem::carry) stream
-		| _      -> failwith "[ocaml-tools/binLoad:list] parsing error"
+    | _      -> failwith "[ocaml-tools/binLoad:list] parsing error"
   in aux []
 
 let bool : bool BinUtils.load = function
   | b::stream -> b, stream
-	| _         -> failwith "[ocaml-tools/binLoad:bool] parsing error"
+  | _         -> failwith "[ocaml-tools/binLoad:bool] parsing error"
 
 let unary : int BinUtils.load =
   let rec aux n = function

@@ -41,12 +41,12 @@ let fold_left0 sx x0 i =
     | Stop      -> s
     | Elem(x, i')  -> aux (sx s x) i'
   in aux x0 i
-	
+
 let fold_right0 sx i x0 =
-	let rec aux i = match i() with
-		| Stop			-> x0
-		| Elem(x, i')	-> sx x (aux s i')
-	in aux i
+  let rec aux i = match i() with
+    | Stop      -> x0
+    | Elem(x, i')  -> sx x (aux s i')
+  in aux i
 
 let find sx i =
   let rec aux i = match i() with
