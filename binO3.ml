@@ -11,3 +11,7 @@ let int = (BinDump.int, BinLoad.int)
 let closure ((dump, load) : ('a, 's) O3.o3s) : ('a, Bitv.t) O3.o3 =
   (BinDump.closure dump, BinLoad.closure load)
 let bool_option_list = (BinDump.bool_option_list, BinLoad.bool_option_list)
+
+let c2 = (BinDump.c2, BinLoad.c2)
+let c3 = (BinDump.c3, BinLoad.c3)
+let c4 = (BinDump.c4, BinLoad.c4)

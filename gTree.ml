@@ -14,18 +14,22 @@ let get_node get_edge0 get_edge1 (node, edge0, edge1) = (node, get_edge0 edge0, 
 let get_edge_leaf edge : (_, _, _) edge = get_edge get_next_leaf edge
 let get_node_leaf node : (_, _, _) node = get_node get_edge_leaf get_edge_leaf node
 
+let o3_next =
+	let dump = Poly.(function
+	| Node node -> C2_0 node
+	| Leaf leaf -> C2_1 leaf)
+	and load = Poly.(function
+	| C2_0 node -> Node node
+	| C2_1 leaf -> Leaf leaf)
+	in (dump, load)
 
 let bindump
   (dump_leaf : 'leaf BinUtils.dump)
   (dump_edge : 'edge BinUtils.dump)
   (dump_node : 'node BinUtils.dump) =
-  let rec dump_next' next stream = match next with
-    | Node node -> false::(dump_node' node stream)
-    | Leaf leaf -> true ::(dump_leaf  leaf stream)
-  and     dump_edge' (edge, next) stream =
-    dump_edge edge (dump_next' next stream)
-  and     dump_node' (node, edge0, edge1) stream =
-    dump_node node (dump_edge' edge0 (dump_edge' edge1 stream))
+  let rec dump_next' next stream = BinDump.c2 dump_node' dump_leaf (fst o3_next next) stream
+  and     dump_edge' = BinDump.pair dump_edge dump_next'
+  and     dump_node' = BinDump.trio dump_node dump_edge' dump_edge'
   in
   (dump_next', dump_edge', dump_node')
 
@@ -37,23 +41,9 @@ let binload
   (load_leaf : 'leaf BinUtils.load)
   (load_edge : 'edge BinUtils.load)
   (load_node : 'node BinUtils.load) =
-  let rec load_next' = function
-    | false::stream ->
-    (
-      let node, stream = load_node' stream in
-      ((Node node), stream)
-    )
-    | true ::stream ->
-    (
-      let leaf, stream = load_leaf  stream in
-      ((Leaf leaf), stream)
-    )
-    | [] -> assert false
-  and     load_edge' stream =
-    BinLoad.pair load_edge load_next' stream
-  and     load_node' stream =
-    let ((node, edge0), edge1), stream = BinLoad.pair (BinLoad.pair load_node load_edge') load_edge' stream in
-    (node, edge0, edge1), stream
+  let rec load_next' stream = (snd o3_next) (BinLoad.c2 load_node load_leaf stream)
+  and     load_edge' = BinLoad.pair load_edge load_next'
+  and     load_node' = BinLoad.trio load_node load_edge' load_edge'
   in
   (load_next', load_edge', load_node')
 

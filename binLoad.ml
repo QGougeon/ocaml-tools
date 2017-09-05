@@ -1,8 +1,50 @@
 let unit : unit BinUtils.load = fun stream -> (), stream
 
+let c2 load0 load1 = function
+	| false::stream -> (
+		let elem, stream = load0 stream in
+		(C2_0 elem), stream
+	)
+	| true ::stream -> (
+		let elem, stream = load1 stream in
+		(C2_1 elem), stream
+	)
+
+let c3 load0 load1 load2 = function
+	| false::stream -> (
+		let elem, stream = load0 stream in
+		(C3_0 elem), stream
+	)
+	| true ::false::stream -> (
+		let elem, stream = load1 stream in
+		(C3_1 elem), stream
+	)
+	| true ::true ::stream -> (
+		let elem, stream = load1 stream in
+		(C3_2 elem), stream
+	)
+
+let c4 load0 load1 load2 load3 = function
+	| false::false::stream -> (
+		let elem, stream = load0 stream in
+		(C3_0 elem), stream
+	)
+	| false::true ::stream -> (
+		let elem, stream = load1 stream in
+		(C3_1 elem), stream
+	)
+	| true ::false::stream -> (
+		let elem, stream = load2 stream in
+		(C3_2 elem), stream
+	)
+	| true ::true ::stream -> (
+		let elem, stream = load3 stream in
+		(C3_3 elem), stream
+	)
+
 let choice loadF loadT = function
   | b::stream -> (if b then loadT else loadF) stream
-  | _      -> assert false
+  | _      -> failwith "[ocaml-tools/binLoad:choice] parsing error"
 
 let option load = choice
   (fun stream -> None, stream)
@@ -60,16 +102,16 @@ let list (load : 'a BinUtils.load) : 'a list BinUtils.load=
     | true::stream  ->
       let elem, stream = load stream in
       aux (elem::carry) stream
-    | _        -> assert false
+		| _      -> failwith "[ocaml-tools/binLoad:list] parsing error"
   in aux []
 
 let bool : bool BinUtils.load = function
   | b::stream -> b, stream
-  | _      -> assert false
+	| _         -> failwith "[ocaml-tools/binLoad:bool] parsing error"
 
 let unary : int BinUtils.load =
   let rec aux n = function
-    | [] -> assert false
+    | [] -> failwith "[ocaml-tools/binLoad:unary] parsing error"
     | head::stream -> if head then (n, stream) else (aux (n+1) stream)
   in aux 0
 
@@ -118,6 +160,6 @@ let bool_option_list = none_list (function
       else (Some None)
     else (Some(Some b1))
   ), stream)
-  | _ -> assert false)
+  | _ -> failwith "[ocaml-tools/binLoad:unary] parsing error")
 
 let o3 = snd
