@@ -8,7 +8,7 @@ sig
   type subprb'
   type subsol
 
-  val presolver : prb -> (sol, coprb * subprb) Utils.merge
+  val presolver : prb -> (sol, coprb * subprb) result
   val solver : subprb -> subsol
   val postsolver : coprb -> subsol -> sol
   val dump_subprb : subprb -> subprb'
@@ -29,14 +29,14 @@ type ('prb, 'sol, 'coprb, 'coprb', 'subprb, 'subprb', 'subsol) t = {
   load_subsol : 'subsol' -> 'subsol;
   map         : 'prb -> 'sol;
   table       : ('subprb', 'subsol') Hashtbl.t;
-  mutable hitCnt : int;
-  mutable clcCnt : int;
+  hitCnt : int ref;
+  clcCnt : int ref;
 }
 
 let create n = {
   table = Hashtbl.create n;
-  hitCnt = 0;
-  clcCnt = 0;
+  hitCnt = ref 0;
+  clcCnt = ref 0;
 }
 
 let test mem a = Hashtbl.mem (mem.table) a;;
@@ -50,29 +50,23 @@ let pull mem a = Hashtbl.find (mem.table) a;;
 
 let apply mem fonc a =
   if test mem a
-  then(
-    mem.hitCnt <- mem.hitCnt + 1;
-    pull mem a
-    )
-  else(
-    mem.clcCnt <- mem.clcCnt + 1;
-    memo mem a (fonc a)
-    )
+  then(incr mem.hitCnt; pull mem a)
+  else(incr mem.clcCnt; memo mem a (fonc c))
 
 let print_stats mem =
   print_string   "MemoTable's length:\t";
   print_int (Hashtbl.length (mem.table));
   print_string  "\nMemoTable's HitCnt:\t";
-  print_int mem.hitCnt;
+  print_int (!(mem.hitCnt));
   print_string  ".\nMemoTable's ClcCnt:\t";
-  print_int mem.clcCnt;
+  print_int (!(mem.clcCnt));
   print_string  ".\n"
 
-let dump_stats mem = Tree.Node [
-    Tree.Node [Tree.Leaf "length:"; StrTree.of_int (Hashtbl.length (mem.table))];
-    Tree.Node [Tree.Leaf "hit count:"; StrTree.of_int mem.hitCnt];
-    Tree.Node [Tree.Leaf "clc count:"; StrTree.of_int mem.clcCnt]
-  ]
+let dump_stats mem = Tree.(Node [
+    Node [Leaf "length:"; STree.of_int (Hashtbl.length (mem.table))];
+    Node [Leaf "hit count:"; STree.of_int (!(mem.hitCnt))];
+    Node [Leaf "clc count:"; STree.of_int (!(mem.clcCnt))]
+  ])
 
 let make n = let mem = create n in ( mem, apply mem )
 

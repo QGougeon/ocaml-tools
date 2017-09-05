@@ -1,5 +1,7 @@
 let unit : unit BinUtils.dump = fun () stream -> stream
 
+let map f dump item stream = dump (f item) stream
+
 let c2 dump0 dump1 elem stream = Poly.(match elem with
   | C2_0 t0 -> false::(dump0 t0 stream)
   | C2_1 t1 -> true ::(dump1 t1 stream))

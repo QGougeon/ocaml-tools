@@ -27,9 +27,9 @@ let bindump
   (dump_leaf : 'leaf BinUtils.dump)
   (dump_edge : 'edge BinUtils.dump)
   (dump_node : 'node BinUtils.dump) =
-  let rec dump_next' next stream = BinDump.c2 dump_node' dump_leaf (fst o3_next next) stream
-  and     dump_edge' = BinDump.pair dump_edge dump_next'
-  and     dump_node' = BinDump.trio dump_node dump_edge' dump_edge'
+  let rec dump_next' item stream = BinDump.(map (fst o3_next) (c2 dump_node' dump_leaf)) item stream
+  and     dump_edge' item stream = BinDump.pair dump_edge dump_next' item stream
+  and     dump_node' item stream = BinDump.trio dump_node dump_edge' dump_edge' item stream
   in
   (dump_next', dump_edge', dump_node')
 
@@ -41,9 +41,9 @@ let binload
   (load_leaf : 'leaf BinUtils.load)
   (load_edge : 'edge BinUtils.load)
   (load_node : 'node BinUtils.load) =
-  let rec load_next' stream = (snd o3_next) (BinLoad.c2 load_node load_leaf stream)
-  and     load_edge' = BinLoad.pair load_edge load_next'
-  and     load_node' = BinLoad.trio load_node load_edge' load_edge'
+  let rec load_next' stream = BinLoad.(map (snd o3_next) (c2 load_node' load_leaf)) stream
+  and     load_edge' stream = BinLoad.pair load_edge load_next' stream
+  and     load_node' stream = BinLoad.trio load_node load_edge' load_edge' stream
   in
   (load_next', load_edge', load_node')
 
