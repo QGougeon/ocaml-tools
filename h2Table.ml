@@ -70,5 +70,5 @@ let strload hsize (loadA : StrTree.tree -> 'a) : StrTree.tree -> 'a t = function
     {access; revers; index}
   )
   | _ -> assert false
-  
+
 

@@ -72,22 +72,6 @@ let load text =
 let loadfile target =
   let stream = Stream.of_channel (open_in target) in
   StrTreeParser.str_tree_parser stream
-(*  let file = open_in target in
-  let read() =
-    try Some(input_line file)
-    with End_of_file ->
-    (
-      close_in file;
-      None
-    )
-  in
-  let rec loop carry = match read () with
-    | Some line -> loop (line::carry)
-    | None -> String.concat "\n" (List.rev carry)
-  in
-  load (loop [])
-*)
-    
 
 let to_pretty =
   let lvlstr lvl text = (StrUtil.ntimes " " lvl)^text^"\n" in
@@ -147,7 +131,7 @@ let to_pair to_a to_b = function
 
 let of_trio of_a of_b of_c (a, b, c) = Tree.Node [of_a a; of_b b; of_c c]
 let to_trio to_a to_b to_c = function
-  | Tree.Node [a; b; c] -> (to_a a, to_b b, to_c c)  
+  | Tree.Node [a; b; c] -> (to_a a, to_b b, to_c c)
   | _ -> assert false
 
 

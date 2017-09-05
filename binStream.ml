@@ -86,7 +86,7 @@ let output_option oc output_some = function
   | None -> output_bool oc false
   | Some x -> output_bool oc true; output_some oc x
 
-let input_option ic input_some = if input_bool ic 
+let input_option ic input_some = if input_bool ic
   then (Some(input_some ic))
   else None
 

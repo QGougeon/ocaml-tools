@@ -66,7 +66,7 @@ let opopfold f x y = match x, y with
   | Some z, None
   | None  , Some z -> Some z
   | Some x, Some y -> Some (f x y)
-  
+
 
 let opmax x = opfold_left max x
 let opmin x = opfold_left min x

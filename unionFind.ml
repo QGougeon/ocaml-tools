@@ -21,7 +21,7 @@ let union array x y =
 
 let remap array =
   let remap = Array.make (Array.length array) 0 in
-  let rec aux n i = 
+  let rec aux n i =
     if i = Array.length array
     then ()
     else

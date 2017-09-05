@@ -104,4 +104,4 @@ let bool_ostream_of_char_ostream os =
     os.closure ()
   in
   from_output_elem closure os_elem
-  
+

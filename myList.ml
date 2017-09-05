@@ -254,7 +254,7 @@ let string_of_list string_of liste = String.concat "" ["["; String.concat "; " (
 
 let print_list string_of liste = print_string (string_of_list string_of liste)
 
-let list_map_z1 func = 
+let list_map_z1 func =
   let rec aux item = function
     | [] -> []
     | head::tail -> (func item head)::(aux head tail)

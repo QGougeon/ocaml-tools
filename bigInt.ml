@@ -1,7 +1,7 @@
 open Big_int
 
 type big_int = Big_int.big_int;;
-  
+
 let zero = Big_int.zero_big_int;;
 let unit = Big_int.unit_big_int;;
 let minus = Big_int.minus_big_int;;

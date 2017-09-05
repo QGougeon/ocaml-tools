@@ -4,7 +4,7 @@ let map_power items size func =
     | n -> List.fold_left (fun carry item -> aux (item::start) carry (n-1)) carry items
   in aux [] [] size
 
-let map_power_cat items size func = 
+let map_power_cat items size func =
   List.concat (map_power items size func)
 
 let map_halfsquare_power items sizeX sizeY filter func =

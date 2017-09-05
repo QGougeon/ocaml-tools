@@ -30,7 +30,7 @@ let apply mem fonc a =
     memo mem a (fonc a)
     )
 
-let print_stats mem = 
+let print_stats mem =
   print_string   "MemoTable's length:\t";
   print_int (Hashtbl.length (mem.table));
   print_string  "\nMemoTable's HitCnt:\t";

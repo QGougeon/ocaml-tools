@@ -15,8 +15,8 @@ sig
   val load_subprb : subprb' -> subprb
   val dump_subsol : subsol -> subsol'
   val load_subsol : subsol' -> subsol
-  
-  val __check_reverse__ : bool  
+
+  val __check_reverse__ : bool
 end
 
 type ('prb, 'sol, 'coprb, 'coprb', 'subprb, 'subprb', 'subsol) t = {
@@ -59,7 +59,7 @@ let apply mem fonc a =
     memo mem a (fonc a)
     )
 
-let print_stats mem = 
+let print_stats mem =
   print_string   "MemoTable's length:\t";
   print_int (Hashtbl.length (mem.table));
   print_string  "\nMemoTable's HitCnt:\t";

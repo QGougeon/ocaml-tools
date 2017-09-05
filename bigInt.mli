@@ -60,4 +60,4 @@ val print : big_int -> unit
 (*gaussbino q(gaussian parameter) r(subset size) m(superset size)*)
 val gaussbino : big_int -> big_int -> big_int -> big_int
 (*log x(basis) n *)
-val log : big_int -> big_int -> big_int 
+val log : big_int -> big_int -> big_int

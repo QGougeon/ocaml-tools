@@ -1,5 +1,5 @@
 type 'a o3b = ('a, Bitv.t) O3.o3
-type 'a o3s = ('a, BinUtils.stream) O3.o3s 
+type 'a o3s = ('a, BinUtils.stream) O3.o3s
 
 let unit = (BinDump.unit, BinLoad.unit)
 let option (dump, load) = (BinDump.option dump, BinLoad.option load)

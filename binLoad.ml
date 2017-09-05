@@ -33,7 +33,7 @@ let while_list func init =
   in aux [] init
 
 (*
-let sized_list load size next = 
+let sized_list load size next =
   let rec aux size =
     let next = if size = 1 then next else aux (size-1) in
     fun carry -> load (fun x -> next (x::carry))
@@ -120,4 +120,4 @@ let bool_option_list = none_list (function
   ), stream)
   | _ -> assert false)
 
-let o3 = snd  
+let o3 = snd

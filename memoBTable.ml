@@ -68,13 +68,13 @@ let apply mem fonc a =
     let bb = try fst mem.o3sB b with exn -> (err 7 None; raise exn) in
     mem.each a aa b bb;
     let err x = err x (Some bb) in
-    let b' = try snd mem.o3sB bb with exn -> (err 8; raise exn) in 
+    let b' = try snd mem.o3sB bb with exn -> (err 8; raise exn) in
     if not (b = b') then (err 9; assert false);
     Hashtbl.add mem.table aa bb;
     b
   )
 
-let print_stats mem = 
+let print_stats mem =
   print_string   "MemoTable's length:\t";
   print_int (Hashtbl.length (mem.table));
   print_string  "\nMemoTable's HitCnt:\t";

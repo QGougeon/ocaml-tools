@@ -15,6 +15,8 @@ val ( $!  )  : 'a iter -> ('b -> 'a -> 'b) -> 'b -> 'b
 val fold_left  : ('a -> 'a -> 'a) -> 'a iter -> 'a option
 val ( $!! )  : 'a iter -> ('a -> 'a -> 'a) -> 'a option
 
+val fold_right0	: ('a -> 'b -> 'b) -> 'a iter -> 'b -> 'b
+
 val of_list : 'a list -> 'a iter
 
 val iter  : ('a -> unit) -> 'a iter -> unit
