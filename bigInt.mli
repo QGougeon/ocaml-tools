@@ -33,6 +33,8 @@ val min : big_int -> big_int -> big_int
 val len : big_int -> int
 val to_string : big_int -> string
 val of_string : string -> big_int
+val to_stree : big_int -> Tree.stree
+val of_stree : Tree.stree -> big_int
 val of_int : int -> big_int
 val is_int : big_int -> bool
 val to_int : big_int -> int
