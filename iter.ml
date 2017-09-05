@@ -41,6 +41,13 @@ let fold_left0 sx x0 i =
 		| Stop			-> s
 		| Elem(x, i')	-> aux (sx s x) i'
 	in aux x0 i
+	
+let fold_right0 sx i x0 =
+	let rec aux i = match i() with
+		| Stop			-> x0
+		| Elem(x, i')	-> sx x (aux s i')
+	in aux i
+
 
 let find sx i =
 	let rec aux i = match i() with
@@ -64,12 +71,15 @@ let for_all sx i =
 
 let ( $! ) i sx x0 = fold_left0 sx x0 i
 
+
+
 let fold_left sx i =
 	match i() with
 		| Stop			-> None
 		| Elem(x0, i')	-> Some(fold_left0 sx x0 i')
 
 let ( $!! ) i sx = fold_left sx i
+
 
 let of_list l =
 	let rec aux = function
