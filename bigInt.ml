@@ -1,7 +1,7 @@
 open Big_int
 
 type big_int = Big_int.big_int;;
-	
+  
 let zero = Big_int.zero_big_int;;
 let unit = Big_int.unit_big_int;;
 let minus = Big_int.minus_big_int;;
@@ -62,29 +62,29 @@ let print big_int = print_string (to_string big_int);;
 let pow2 n = shift_left unit n;;
 
 let gaussbino q r m =
-	let rec aux = function
-		| m when r=m -> unit
-		| m -> (((pow q m)-unit)*(aux (m-unit)))/((pow q (m-r))-unit)
-	in if r=zero
-	then unit
-	else if r=m
-	then unit
-	else if r>m
-	then zero
-	else aux m
+  let rec aux = function
+    | m when r=m -> unit
+    | m -> (((pow q m)-unit)*(aux (m-unit)))/((pow q (m-r))-unit)
+  in if r=zero
+  then unit
+  else if r=m
+  then unit
+  else if r>m
+  then zero
+  else aux m
 ;;
 
 let log x =
-	let rec aux = function
-		| n when n=zero -> assert false
-		| n when n < x	-> unit
-		| n				-> unit+(aux (n/x))
-	in
-	let rec aux0 = function
-		| n when n=zero -> assert false
-		| n when n=unit	-> zero
-		| n	when n < x	-> unit
-		| n when modulo n x=zero -> unit+(aux0(n/x))
-		| n				-> unit+(aux (n/x))
-	in aux0
+  let rec aux = function
+    | n when n=zero -> assert false
+    | n when n < x  -> unit
+    | n        -> unit+(aux (n/x))
+  in
+  let rec aux0 = function
+    | n when n=zero -> assert false
+    | n when n=unit  -> zero
+    | n  when n < x  -> unit
+    | n when modulo n x=zero -> unit+(aux0(n/x))
+    | n        -> unit+(aux (n/x))
+  in aux0
 ;;

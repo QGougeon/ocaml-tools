@@ -6,16 +6,16 @@ let cons x = x
 let uncons x = x
 
 let ophdtl = function
-	| [] -> None
-	| head::tail -> Some (head, tail)
+  | [] -> None
+  | head::tail -> Some (head, tail)
 
 let ophd = function
-	| [] -> None
-	| head::_ -> Some head
+  | [] -> None
+  | head::_ -> Some head
 
 let optl = function
-	| [] -> None
-	| _::tail -> Some tail
+  | [] -> None
+  | _::tail -> Some tail
 
 let hd = List.hd
 let tl = List.tl
@@ -49,15 +49,15 @@ let isnull vect = not (nonull vect)
 let xor (a:bool) b = a!=b
 let add = List.map2 xor
 let cadd = function
-	| true -> add
-	| false -> (fun x _ -> x)
+  | true -> add
+  | false -> (fun x _ -> x)
 let no l = l ||> (not)
 
 let map_vector size func = Maps.map_power bools size (cons >> func)
 
 let cond_vector cond_vect vect =
-	List.combine cond_vect vect ||> (function (true, x) -> Some (x:bool) | _ -> None) |> MyList.list_of_oplist
+  List.combine cond_vect vect ||> (function (true, x) -> Some (x:bool) | _ -> None) |> MyList.list_of_oplist
 
 let cond_filter cond_vect liste =
-	List.combine cond_vect liste ||> (function (true, x) -> Some x | _ -> None) |> MyList.list_of_oplist
+  List.combine cond_vect liste ||> (function (true, x) -> Some x | _ -> None) |> MyList.list_of_oplist
 

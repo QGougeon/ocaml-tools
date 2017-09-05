@@ -34,17 +34,17 @@ assert(l1 = l2);;
 print_newline();;
 
 let l = [
-	"\"a\"";
-	"[  \"a\"  \"b\"  ]";
-	"(  \"a\"  [  \"a\"   \"b\"  ] )";
-		];;
+  "\"a\"";
+  "[  \"a\"  \"b\"  ]";
+  "(  \"a\"  [  \"a\"   \"b\"  ] )";
+    ];;
 
-List.iter	(fun x ->
-	print_string x; print_newline();
-	x |> StrTree.load |> StrTree.dump |> print_string;
-	print_newline();
-	print_newline();
-			) l;;
+List.iter  (fun x ->
+  print_string x; print_newline();
+  x |> StrTree.load |> StrTree.dump |> print_string;
+  print_newline();
+  print_newline();
+      ) l;;
 
 
 
