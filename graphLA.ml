@@ -8,18 +8,13 @@ type graph = {nodes : int list; edges : int list array } (* G = (V, E) *)
 
 (* Dump/Load *)
 
-let strdump_graph graph = Tree.Node [
-  STD.list STD.int graph.nodes;
-  STD.array (STD.list STD.int) graph.edges
-]
+let o3_graph =
+	let dump graph = (graph.nodes, graph.edges)
+	and load (nodes, edges) = {nodes; edges} in
+	(dump, load)
 
-let strload_graph stree = function
-  | Tree.Node [nodes; edges] ->
-  {
-    nodes = STL.list STL.int nodes;
-    edges = STL.array (STL.list STL.int) edges
-  }
-  | _ -> assert false
+let strdump_graph = STD.(map (fst o3_graph) (pair (list int) (array (list int))))
+let strload_graph = STL.(map (snd o3_graph) (pair (list int) (array (list int))))
 
 (* Tools *)
 
