@@ -8,6 +8,8 @@ let string = leaf StrLoad.string
 let bool   = leaf StrLoad.bool
 let int    = leaf StrLoad.int
 let float  = leaf StrLoad.float
+let bitv_bool = leaf StrLoad.bitv_bool
+let bitv_hexa = leaf StrLoad.bitv_hexa
 let option load = function
 	| Node [] -> None
 	| Node [some] -> Some(load some)

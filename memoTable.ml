@@ -40,9 +40,9 @@ let print_stats mem =
   print_string  ".\n"
 
 let dump_stats mem = Tree.Node [
-    Tree.Node [Tree.Leaf "length:"; STree.of_int (Hashtbl.length (mem.table))];
-    Tree.Node [Tree.Leaf "hit count:"; STree.of_int mem.hitCnt];
-    Tree.Node [Tree.Leaf "clc count:"; STree.of_int mem.clcCnt]
+    Tree.Node [Tree.Leaf "length:"; STD.int (Hashtbl.length (mem.table))];
+    Tree.Node [Tree.Leaf "hit count:"; STD.int mem.hitCnt];
+    Tree.Node [Tree.Leaf "clc count:"; STD.int mem.clcCnt]
   ]
 
 let make n = let mem = create n in ( mem, apply mem )

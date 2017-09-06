@@ -1,5 +1,6 @@
 let ignore _ = "_"
-let bitv = Bitv.L.to_bool_string
+let bitv_bool = Bitv.L.to_bool_string
+let bitv_hexa = Bitv.L.to_hexa_string
 let string item : string = item
 let option dump = function
   | None -> "None"

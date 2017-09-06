@@ -6,6 +6,8 @@ let string = leaf StrDump.string
 let bool   = leaf StrDump.bool
 let int    = leaf StrDump.int
 let float  = leaf StrDump.float
+let bitv_bool = leaf StrDump.bitv_bool
+let bitv_hexa = leaf StrDump.bitv_hexa
 let option dump = function
 	| None      -> Tree.Node []
 	| Some some -> Tree.Node [dump some]

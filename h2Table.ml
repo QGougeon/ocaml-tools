@@ -49,19 +49,19 @@ let mapreduce tbl init map reduce =
 let strdump (dumpA : 'a -> Tree.stree) (tbl : 'a t) : Tree.stree =
   let stack = ref [] in
   let push obj = stack := obj::(!stack) in
-  Hashtbl.iter (fun key objA -> push (Tree.Node [STree.of_int key; dumpA objA])) tbl.revers;
-  Tree.Node ((STree.of_int tbl.index)::(!stack))
+  Hashtbl.iter (fun key objA -> push (Tree.Node [STD.int key; dumpA objA])) tbl.revers;
+  Tree.Node ((STD.int tbl.index)::(!stack))
 
 let strload hsize (loadA : Tree.stree -> 'a) : Tree.stree -> 'a t = function
   | Tree.Node (index::table) ->
   (
-    let index = STree.to_int index in
+    let index = STL.int index in
     let access = Hashtbl.create hsize
     and revers = Hashtbl.create hsize in
     List.iter (function
       | Tree.Node [index; item] ->
       (
-        let index = STree.to_int index
+        let index = STL.int index
         and item  = loadA item in
         Hashtbl.add access item index;
         Hashtbl.add revers index item;

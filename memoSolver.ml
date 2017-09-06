@@ -63,9 +63,9 @@ let print_stats mem =
   print_string  ".\n"
 
 let dump_stats mem = Tree.(Node [
-    Node [Leaf "length:"; STree.of_int (Hashtbl.length (mem.table))];
-    Node [Leaf "hit count:"; STree.of_int (!(mem.hitCnt))];
-    Node [Leaf "clc count:"; STree.of_int (!(mem.clcCnt))]
+    Node [Leaf "length:"; STD.int (Hashtbl.length (mem.table))];
+    Node [Leaf "hit count:"; STD.int (!(mem.hitCnt))];
+    Node [Leaf "clc count:"; STD.int (!(mem.clcCnt))]
   ])
 
 let make n = let mem = create n in ( mem, apply mem )

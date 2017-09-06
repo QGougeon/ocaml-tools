@@ -9,15 +9,15 @@ type graph = {nodes : int list; edges : int list array } (* G = (V, E) *)
 (* Dump/Load *)
 
 let strdump_graph graph = Tree.Node [
-  STree.of_list STree.of_int graph.nodes;
-  STree.of_array (STree.of_list STree.of_int) graph.edges
+  STD.list STD.int graph.nodes;
+  STD.array (STD.list STD.int) graph.edges
 ]
 
 let strload_graph stree = function
   | Tree.Node [nodes; edges] ->
   {
-    nodes = STree.to_list STree.to_int nodes;
-    edges = STree.to_array (STree.to_list STree.to_int) edges
+    nodes = STL.list STL.int nodes;
+    edges = STL.array (STL.list STL.int) edges
   }
   | _ -> assert false
 

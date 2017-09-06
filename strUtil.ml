@@ -8,15 +8,15 @@ let bool_of_char = function
   | '0'  -> false
   | _    -> failwith "[ocaml-tools/strUtil:bool_of_char] bool parsing failure"
 let string_of_bool = function
-  | true  -> "true"
-  | false  -> "false"
-let pretty_of_bool = function
-  | true  -> "1"
-  | false  -> "."
+  | true   -> "1"
+  | false  -> "0"
 let bool_of_string = function
   | "1"  -> true
   | "0"  -> false
   | _    -> failwith "[ocaml-tools/strUtil:bool_of_string] bool parsing failure"
+let pretty_of_bool = function
+  | true  -> "1"
+  | false  -> "."
 let print_bool = function
   | true  -> print_string "1"
   | false  -> print_string "0"
@@ -72,4 +72,4 @@ let split (c:char) (s:string) : string list =
 
 let ntimes s n = String.concat "" (MyList.ntimes s n)
 
-let print_stream stream = print_string(catmap "" Tools.string_of_bool stream)
+let print_stream stream = print_string(catmap "" string_of_bool stream)

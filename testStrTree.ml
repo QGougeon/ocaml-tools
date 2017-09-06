@@ -3,7 +3,7 @@ let l1 = [Tree.Leaf "a"];;
 let d1 = STree.dump l1;;
 
 print_string d1; print_newline();;
-print_string (STree.to_pretty l1); print_newline();;
+STL.pprint_v2 l1; print_newline();;
 
 let l2 = STree.load d1;;
 
@@ -14,7 +14,7 @@ let l1 = [Tree.Leaf "a b"];;
 let d1 = STree.dump l1;;
 
 print_string d1; print_newline();;
-print_string (STree.to_pretty l1); print_newline();;
+STL.pprint_v2 l1; print_newline();;
 
 let l2 = STree.load d1;;
 
@@ -25,7 +25,7 @@ let l1 = [Tree.Node [Tree.Leaf "a"; Tree.Leaf "a b"]];;
 let d1 = STree.dump l1;;
 
 print_string d1; print_newline();;
-print_string (STree.to_pretty l1); print_newline();;
+STL.pprint_v2 l1; print_newline();;
 
 let l2 = STree.load d1;;
 
@@ -45,7 +45,5 @@ List.iter  (fun x ->
   print_newline();
   print_newline();
       ) l;;
-
-
 
 exit 0;;

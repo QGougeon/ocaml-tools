@@ -31,11 +31,6 @@ let op_fun f = function
   | None    -> None
   | Some x  -> Some(f x)
 
-let string_of_bool = function
-  | true  -> "1"
-  | false  -> "0"
-
-let print_bool x = print_string (string_of_bool x)
 
 
 let subset special default =
@@ -123,12 +118,6 @@ let math_log_up x y =
     else (assert(math_pow x (z'-1) < y && y <= math_pow x z'));
   z'
 
-let string_of_option string_of = function
-  | None -> "None"
-  | Some x -> "Some ("^(string_of x)^")"
-
-
-
 let check func objet =
   assert(func objet);
   objet
@@ -143,7 +132,6 @@ let bin_of_int =
 let unop = function
   | None -> assert false
   | Some x -> x
-
 
 let bin_of_char c =
   let rec aux carry x = function
