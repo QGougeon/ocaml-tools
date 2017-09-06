@@ -80,7 +80,7 @@ let stream_to_stree stream =
   parse_node ()
 
 let loadfile target =
-	let file = open_in target in
-	let stree = file |> Stream.of_channel |> stream_to_stree in
-	close_in file;
-	stree
+  let file = open_in target in
+  let stree = file |> Stream.of_channel |> stream_to_stree in
+  close_in file;
+  stree

@@ -1,8 +1,8 @@
 let unit : unit BinUtils.load = fun stream -> (), stream
 
 let map f load stream =
-	let item, stream = load stream in
-	(f item), stream
+  let item, stream = load stream in
+  (f item), stream
 
 let c2 load0 load1 = function
   | false::stream -> Poly.(
