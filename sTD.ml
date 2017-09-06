@@ -9,8 +9,8 @@ let float  = leaf StrDump.float
 let bitv_bool = leaf StrDump.bitv_bool
 let bitv_hexa = leaf StrDump.bitv_hexa
 let option dump = function
-	| None      -> Tree.Node []
-	| Some some -> Tree.Node [dump some]
+  | None      -> Tree.Node []
+  | Some some -> Tree.Node [dump some]
 let list dump list = Tree.Node (List.map dump list)
 let array dump array = list dump (Array.to_list array)
 let unit () = Tree.Node []

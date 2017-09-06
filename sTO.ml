@@ -18,18 +18,18 @@ let output_tree output_string =
   in aux
 
 let output_treelist output_string treelist =
-	List.iter (fun tree -> output_tree output_string tree; output_string "\n") treelist
+  List.iter (fun tree -> output_tree output_string tree; output_string "\n") treelist
 
 let dump treelist = StrUtil.catmap "\n" dump_tree treelist
 
 let dumpfile treelist target =
   let file = open_out target in
-	output_treelist (output_string file) treelist;
+  output_treelist (output_string file) treelist;
   close_out file;
   ()
 
 let print_tree = output_tree print_string
-let print_treelist = output_treelist print_string 
+let print_treelist = output_treelist print_string
 
 let pretty_output_tree output_string =
   let lvlstr lvl text = output_string ((StrUtil.ntimes " " lvl)^text^"\n") in
@@ -39,7 +39,7 @@ let pretty_output_tree output_string =
   in aux 0
 
 let pprint_v1 treelist =
-	List.iter (fun tree -> pretty_output_tree print_string tree; print_newline()) treelist
+  List.iter (fun tree -> pretty_output_tree print_string tree; print_newline()) treelist
 
 (* get colored version of str *)
 let colorize color str =
